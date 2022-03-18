@@ -1,0 +1,34 @@
+{% extends 'post/index.html'%}
+{% load static %}
+
+
+{% block title %}
+Подробности поста
+{% endblock %}
+
+{% block content %}
+    <h1>Посты пользователей</h1>
+               <div class="p-3 mb-2 bg-dark text-white" style="max-height: 840px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                         {% if post.image_profile_user %}
+                           <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="...">
+                         {% else %}
+                           <img src="{% static '../../../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
+                         {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h3 class="card-title">{{ post.customers.first_name}}</h3>
+                          <p class="card-text"><h3>Название Миссии:</h3> {{post.title}}</p>
+                          <p class="card-text"><h3>Основыные подробности:</h3> {{post.text}}</p>
+                        {% if post.image_profile_user %}
+                           <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="..." width="500px" height="500px">
+                          {% else %}
+                                     <p></p>
+                         {% endif %}
+                      </div>
+                    </div>
+                  </div>
+               </div>
+{% endblock %}

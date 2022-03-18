@@ -1,0 +1,23 @@
+{% extends 'post/index.html'%}
+{% load static %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block content %}
+ <h1>Загрузка поста</h1>
+ <form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Иконака агента</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file">
+ </div>
+  <div class="mb-3">
+    <label for="formFileSm" class="form-label">Фото с задания</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file">
+ </div>
+
+  <button class="btn btn-dark">Добавить пост</button>
+{% endblock %}

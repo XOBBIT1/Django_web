@@ -1,0 +1,33 @@
+{% extends 'post/index.html'%}
+{% load static %}
+
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block content %}
+    <h1>Посты пользователей</h1>
+        {% for post in object_list %}
+               <div class="p-3 mb-2 bg-dark text-white " style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                         {% if post.image_profile_user %}
+                           <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="...">
+                         {% else %}
+                            <img src="{% static '../../../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
+                         {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ post.customers.first_name}}</h5>
+                        <a class="navbar-toggler" href="{% url 'post-detail' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                         <p class="card-text">{{post.title}}</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+        {% endfor %}
+
+{% endblock %}
