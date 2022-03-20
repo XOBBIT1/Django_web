@@ -22,13 +22,16 @@
                         <h3 class="card-title">{{ post.customers.first_name}}</h3>
                           <p class="card-text"><h3>Название Миссии:</h3> {{post.title}}</p>
                           <p class="card-text"><h3>Основыные подробности:</h3> {{post.text}}</p>
-                        {% if post.image_profile_user %}
-                           <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="..." width="500px" height="500px">
+                        {% if post.image_post %}
+                           <img src="{{ post.image_post.url }}" class="img-fluid rounded-start" alt="..." width="500px" height="500px">
                           {% else %}
-                                     <p></p>
+                            <img src="{% static '../media/images/супер-секретный-зазор-82298048.jpg' %}" class="img-fluid rounded-start" alt="..." width="500px" height="500px">
                          {% endif %}
                       </div>
                     </div>
+                       <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                            <button class="btn btn-dark">Удалить пост</button>
+                       </a>
                   </div>
                </div>
 {% endblock %}

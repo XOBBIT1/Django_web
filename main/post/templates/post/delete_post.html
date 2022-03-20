@@ -1,0 +1,17 @@
+{% extends 'post/index.html'%}
+{% load static %}
+
+
+{% block title %}
+Удалить пост
+{% endblock %}
+
+{% block content %}
+    <h3> Удалить пост: {{ post.title }} </h3>
+    <br>
+    <form method="POST">
+    {% csrf_token %}
+        <p>Вы уверены, что хотите удалить пост ?</p>
+        <br>
+         <button class="btn btn-dark">Удалить пост</button>
+{% endblock %}

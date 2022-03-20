@@ -15,14 +15,18 @@
                          {% if post.image_profile_user %}
                            <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="...">
                          {% else %}
-                            <img src="{% static '../../../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
+                            <img src="{% static '../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
                          {% endif %}
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">
                         <h5 class="card-title">{{ post.customers.first_name}}</h5>
+                        <h5 class="card-title">{{ post.dara_post}}</h5>
                         <a class="navbar-toggler" href="{% url 'post-detail' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                         <p class="card-text">{{post.title}}</p>
+                         <button class="btn btn-dark">{{post.title}}</button>
+                        </a>
+                        <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                           <button class="btn btn-dark">Удалить пост</button>
                         </a>
                       </div>
                     </div>
