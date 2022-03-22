@@ -7,14 +7,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Посты пользователей</h1>
                <div class="p-3 mb-2 bg-dark text-white" style="max-height: 840px;">
                   <div class="row g-0">
                     <div class="col-md-4">
                          {% if post.image_profile_user %}
                            <img src="{{ post.image_profile_user.url }}" class="img-fluid rounded-start" alt="...">
                          {% else %}
-                           <img src="{% static '../../../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
+                           <img src="{% static '../media/images/4526_900.jpg' %}" class="img-fluid rounded-start" alt="...">
                          {% endif %}
                     </div>
                     <div class="col-md-8">
@@ -27,11 +26,20 @@
                           {% else %}
                             <img src="{% static '../media/images/супер-секретный-зазор-82298048.jpg' %}" class="img-fluid rounded-start" alt="..." width="500px" height="500px">
                          {% endif %}
+                       <form action="{% url 'like_post' post.pk %}" method="POST">
+                           {% csrf_token %}
+                               <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-secondary">
+                                   {{ total_likes }}-like</button>
+                       </form>
                       </div>
-                    </div>
-                       <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                            <button class="btn btn-dark">Удалить пост</button>
-                       </a>
-                  </div>
+                         {% if user.is_authenticated %}
+                            {% if user.id == post.customers.id%}
+                                </div>
+                                   <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                                        <button class="btn btn-dark">Удалить пост</button>
+                                   </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                </div>
 {% endblock %}

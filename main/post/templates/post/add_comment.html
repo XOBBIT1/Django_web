@@ -2,19 +2,19 @@
 {% load static %}
 
 {% block title %}
-Главная страница
+Добавление коммента
 {% endblock %}
 
 {% block content %}
- <h1>Загрузка поста</h1>
+ <h1>Добавление коммента</h1>
           {% if user.is_authenticated %}
              <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               {{form.as_p}}
 
-              <button class="btn btn-dark">Добавить пост</button>
+              <button class="btn btn-dark">Оставить комментарий</button>
           {% else %}
-                 <h1>Для добовления постов вам нужно
+                 <h1>Для комментирования вам нужно
                      <a class="navbar-toggler" href="{% url 'login' %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                        Войти
                      </a>

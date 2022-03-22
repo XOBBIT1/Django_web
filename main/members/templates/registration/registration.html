@@ -1,0 +1,17 @@
+{% extends 'post/index.html'%}
+{% load static %}
+
+
+{% block title %}
+Регестрация
+{% endblock %}
+
+{% block content %}
+    <h3> Регестрация аккаунта </h3>
+    <br>
+    <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+        <br>
+         <button class="btn btn-dark">Registration</button>
+{% endblock %}

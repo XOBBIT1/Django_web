@@ -9,7 +9,7 @@
 {% block content %}
     <h1>Посты пользователей</h1>
         {% for post in object_list %}
-               <div class="p-3 mb-2 bg-dark text-white " style="max-width: 540px;">
+               <div class="p-3 mb-2 bg-dark text-white " style="max-width: 1040px;">
                   <div class="row g-0">
                     <div class="col-md-4">
                          {% if post.image_profile_user %}
@@ -23,14 +23,50 @@
                         <h5 class="card-title">{{ post.customers.first_name}}</h5>
                         <h5 class="card-title">{{ post.dara_post}}</h5>
                         <a class="navbar-toggler" href="{% url 'post-detail' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                         <button class="btn btn-dark">{{post.title}}</button>
+                         <button class="btn btn-secondary">{{post.title}}</button>
                         </a>
-                        <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                           <button class="btn btn-dark">Удалить пост</button>
-                        </a>
+                           {% if user.is_authenticated %}
+                              {% if user.id == post.customers.id%}
+                          <hr>
+                                <a class="navbar-toggler" href="{% url 'delete-post' post.pk %}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                                   <button class="btn btn-secondary">Удалить пост</button>
+                                </a>
+                             {% endif %}
+                          {% endif %}
+                          <hr>
+                           <form action="{% url 'like_post' post.pk %}" method="POST">
+                               {% csrf_token %}
+                                   <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-secondary">
+                                       Like</button>
+                           </form>
+                          <hr>
+                          <h4>Комменты...</h4>
+                          {%if not post.comments.all %}
+                          <a href="{% url 'add-comment' post.pk %}">
+                                Добавить комментарий
+                            </a>
+                          <br>
+                          Комеентариев пока нет...
+                          {% else %}
+                          <a href="{% url 'add-comment' post.pk %}">
+                                Добавить комментарий
+                            </a>
+                          <br>
+                            {% for comment in post.comments.all %}
+                                <br>
+                                <strong>
+                                {{ comment.name }}-{{ comment.data_comment }}
+                                </strong>
+                                <br>
+                                {{ comment.text }}
+                            {% endfor %}
+                          {% endif %}
+                          <br>
+                          <br>
                       </div>
                     </div>
                   </div>
+
                </div>
         {% endfor %}
 
